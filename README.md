@@ -1,6 +1,6 @@
 # Project Title: User Management System
 
-An User Management System built with React.js for the frontend and Node.js/Express.js for the backend. This application allows users to register, log in, manage their profiles, and perform CRUD operations on employee data, including time management functionalities.
+An User Management System built with React.js for the frontend and Node.js/Express.js for the backend. This application allows users to register, log in, manage their profiles, and perform view and edit operations on  data.
 
 ## Table of Contents
 - [Features](#features)

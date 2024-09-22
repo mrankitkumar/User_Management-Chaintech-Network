@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('token') || '');
     const [activeChanged, setActiveChanged] = useState(false);
 
+    // user register
     const register = async (name, email, password) => {
         try {
             const response = await fetch(`${apiPath}/api/auth/register`, {
@@ -29,7 +30,7 @@ export const AuthProvider = ({ children }) => {
             throw error;
         }
     };
-
+   //user login
     const login = async (email, password) => {
         try {
             const response = await fetch(`${apiPath}/api/auth/login`, {
@@ -55,6 +56,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    //user get profile
     const getProfile = async () => {
         try {
             const response = await fetch(`${apiPath}/api/auth/profile`, {
@@ -73,7 +75,7 @@ export const AuthProvider = ({ children }) => {
             const responseData = await response.json();
           
             setActiveChanged(true); 
-            console.log(responseData);
+            // console.log(responseData);
             return responseData;
         } catch (error) {
             console.error('Error fetching profile:', error.message);
@@ -81,6 +83,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    //user update profile
     const updateProfile = async (updatedData) => {
         try {
             const response = await fetch(`${apiPath}/api/auth/profile`, {
@@ -105,7 +108,6 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
-      
         setToken('');
         localStorage.removeItem('token');
         

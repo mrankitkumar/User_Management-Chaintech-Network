@@ -87,7 +87,7 @@ exports.getUserProfile = async (req, res) => {
 };
 
 
-
+// update user
 exports.updateUserProfile = async (req, res) => {
     try {
         const { name, email, password } = req.body;

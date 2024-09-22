@@ -9,8 +9,6 @@ const EditProfileModal = ({ isOpen, onClose, user }) => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
    
-
-    // Reset form when modal opens
     useEffect(() => {
         if (isOpen && user) {
             setName(user.name);
@@ -20,11 +18,9 @@ const EditProfileModal = ({ isOpen, onClose, user }) => {
             
         }
     }, [isOpen, user]);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-
         const updatedData = {
             name,
             email,
@@ -33,10 +29,8 @@ const EditProfileModal = ({ isOpen, onClose, user }) => {
         if (password) {
             updatedData.password = password;
         }
-
         try {
             await updateProfile(updatedData);
-           
             onClose();
             alert('Updated successful!');
         } catch (error) {

@@ -24,7 +24,7 @@ const Login = () => {
     return (
         <div className="login-container d-flex justify-content-center align-items-center min-vh-100">
             <div className="login-form p-4 shadow rounded">
-                <h2 className="mb-4 text-center">Login</h2>
+                <h4 className="mb-4 text-center">Login</h4>
                 {error && <div className="alert alert-danger">{error}</div>}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">

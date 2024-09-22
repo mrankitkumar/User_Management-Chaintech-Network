@@ -27,7 +27,9 @@ const Profile = () => {
                 }
             };
             fetchProfile();
-        } else {
+        } 
+        else 
+        {
             navigate("/");
         }
     }, [refresh,token]);

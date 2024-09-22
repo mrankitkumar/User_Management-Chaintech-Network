@@ -2,23 +2,30 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 
-
 const Login = () => {
     const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await login(email, password);
-        navigate('/profile');
+        setError('');
+        try {
+            await login(email, password);
+            alert('Login successful!');
+            navigate('/profile');
+        } catch (err) {
+            setError("Invalid Crediantial");
+        }
     };
 
     return (
         <div className="login-container d-flex justify-content-center align-items-center min-vh-100">
             <div className="login-form p-4 shadow rounded">
                 <h2 className="mb-4 text-center">Login</h2>
+                {error && <div className="alert alert-danger">{error}</div>}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <input

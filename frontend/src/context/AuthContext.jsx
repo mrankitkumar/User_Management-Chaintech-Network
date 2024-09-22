@@ -4,19 +4,17 @@ import { apiPath } from '../constant';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+ 
     const [token, setToken] = useState(localStorage.getItem('token') || '');
-    const  [activeChanged, setactiveChanged]=useState(false)
+    const [activeChanged, setActiveChanged] = useState(false);
 
-   
     const register = async (name, email, password) => {
-       
         try {
             const response = await fetch(`${apiPath}/api/auth/register`, {
-                method: "POST",
+                method: 'POST',
                 headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ name, email, password }),
             });
@@ -24,29 +22,25 @@ export const AuthProvider = ({ children }) => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-
             const responseData = await response.json();
-           
             return responseData;
         } catch (error) {
-            console.error("Error during registration:", error.message);
-            throw error; 
+            console.error('Error during registration:', error.message);
+            throw error;
         }
     };
 
-
     const login = async (email, password) => {
-       
         try {
             const response = await fetch(`${apiPath}/api/auth/login`, {
-                method: "POST",
+                method: 'POST',
                 headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ email, password }),
             });
-
+            console.log(response);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -54,74 +48,77 @@ export const AuthProvider = ({ children }) => {
             const responseData = await response.json();
             setToken(responseData.token);
             localStorage.setItem('token', responseData.token);
-           
             return responseData;
         } catch (error) {
-            console.error("Error during login:", error.message);
-            throw error; 
+            console.error('Error during login:', error.message);
+            throw error;
         }
     };
 
-   
     const getProfile = async () => {
-        setactiveChanged(false);
         try {
             const response = await fetch(`${apiPath}/api/auth/profile`, {
-                headers: { Authorization: `Bearer ${token}` },
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
             });
 
             if (!response.ok) {
+
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
+
             const responseData = await response.json();
-            setUser(responseData);
-            setactiveChanged(true);
+          
+            setActiveChanged(true); 
+            console.log(responseData);
             return responseData;
         } catch (error) {
-            console.error("Error fetching profile:", error.message);
-            throw error; 
+            console.error('Error fetching profile:', error.message);
+            throw error;
         }
     };
 
-    // Function to update the user profile
     const updateProfile = async (updatedData) => {
-       
         try {
             const response = await fetch(`${apiPath}/api/auth/profile`, {
-                method: 'PUT', 
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify(updatedData),
             });
-    
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
             const responseData = await response.json();
-            setUser(responseData);
-           
             return responseData;
         } catch (error) {
-            console.error('Error updating profile:', error);
-            throw error; 
+            console.error('Error updating profile:', error.message);
+            throw error;
         }
     };
-    
-    // Function to log out the user
+
     const logout = () => {
-        setUser(null);
+      
         setToken('');
         localStorage.removeItem('token');
+        
     };
 
-    
     useEffect(() => {
         if (token) {
             getProfile();
-        }
+        } 
     }, [token]);
 
     return (
-        <AuthContext.Provider value={{ user, token,activeChanged, register, login, getProfile, updateProfile, logout }}>
+        <AuthContext.Provider value={{  token, activeChanged, register, login, getProfile, updateProfile, logout }}>
             {children}
         </AuthContext.Provider>
     );

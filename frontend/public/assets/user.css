@@ -51,21 +51,40 @@
 
 /* profile */
 
+.profile-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .profile-card {
-    background-color: #ffffff; /* White background for the card */
-    border-radius: 0.5rem; /* Rounded corners */
-    border: 1px solid #dee2e6; /* Light border */
+    background: linear-gradient(135deg, #6f42c1 0%, #007bff 100%);
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 .card-title {
-    color: #007bff; /* Primary color for the title */
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
 }
 
-.btn-danger {
-    margin-left: 0.5rem; /* Spacing between buttons */
+.card-text {
+    font-size: 1.2rem;
 }
 
-.container {
-    max-width: 600px; /* Limit the container width */
-    margin: auto; /* Center the container */
+.btn {
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+}
+
+.text-center {
+    margin-top: 20px;
 }

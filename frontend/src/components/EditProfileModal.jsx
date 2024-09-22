@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Alert } from 'react-bootstrap';
 import { AuthContext } from '../context/AuthContext';
 
 const EditProfileModal = ({ isOpen, onClose, user }) => {
@@ -7,33 +7,40 @@ const EditProfileModal = ({ isOpen, onClose, user }) => {
     const [name, setName] = useState(user.name);
     const [email, setEmail] = useState(user.email);
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+   
 
-    // Use effect to reset form when modal opens
+    // Reset form when modal opens
     useEffect(() => {
         if (isOpen && user) {
             setName(user.name);
             setEmail(user.email);
-            setPassword(''); // Clear password field
+            setPassword('');
+            setError('');
+            
         }
-    }, [isOpen]);
+    }, [isOpen, user]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+        setError('');
+
         const updatedData = {
             name,
             email,
         };
 
         if (password) {
-            updatedData.password = password; // Include password if provided
+            updatedData.password = password;
         }
 
         try {
-            await updateProfile(updatedData); // Send all the data in one request
-            onClose(); // Close the modal after successful update
+            await updateProfile(updatedData);
+           
+            onClose();
+            alert('Updated successful!');
         } catch (error) {
-            console.error('Error updating profile:', error);
+            setError('Error updating profile: ' + error.message);
         }
     };
 
@@ -43,6 +50,8 @@ const EditProfileModal = ({ isOpen, onClose, user }) => {
                 <Modal.Title>Edit Profile</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                {error && <Alert variant="danger">{error}</Alert>}
+                
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label className="form-label">Name</label>

@@ -1,0 +1,71 @@
+/* login css */
+.login-container {
+    background-color: #f8f9fa; /* Light background color */
+}
+
+.login-form {
+    background-color: #ffffff; /* White background for the form */
+    border: 1px solid #dee2e6; /* Light border for the form */
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+.login-form h2 {
+    color: #007bff; /* Primary color for the heading */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Primary button color */
+    border: none; /* Remove border */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* register page */
+.register-container {
+    background-color: #f8f9fa; /* Light background color */
+}
+
+.register-form {
+    background-color: #ffffff; /* White background for the form */
+    border: 1px solid #dee2e6; /* Light border for the form */
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+.register-form h2 {
+    color: #007bff; /* Primary color for the heading */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Primary button color */
+    border: none; /* Remove border */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+
+/* profile */
+
+.profile-card {
+    background-color: #ffffff; /* White background for the card */
+    border-radius: 0.5rem; /* Rounded corners */
+    border: 1px solid #dee2e6; /* Light border */
+}
+
+.card-title {
+    color: #007bff; /* Primary color for the title */
+}
+
+.btn-danger {
+    margin-left: 0.5rem; /* Spacing between buttons */
+}
+
+.container {
+    max-width: 600px; /* Limit the container width */
+    margin: auto; /* Center the container */
+}
